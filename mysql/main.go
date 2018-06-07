@@ -35,7 +35,7 @@ func init() {
 		DBAuthUser = "gouser"
 		DBAuthPass = "Accenture01!"
 		DBSchema   = "user"
-		DBPort     = "9042"
+		DBPort     = "3306"
 	)
 	var err error
 	// variables
