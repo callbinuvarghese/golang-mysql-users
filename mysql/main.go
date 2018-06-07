@@ -22,6 +22,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"os"
 	"reflect"
+	"strconv"
 )
 
 //contains the database connection
@@ -30,7 +31,7 @@ var Db *sql.DB // Note the sql package provides the namespace
 func init() {
 	// constants
 	const (
-		DBHost     = ""
+		DBHost     = "10.251.45.94"
 		DBAuthUser = "gouser"
 		DBAuthPass = "Accenture01!"
 		DBSchema   = "user"
@@ -44,6 +45,7 @@ func init() {
 		dbAuthPass string
 		dbSchema   string
 		dSN        string
+		dbPort     int
 	)
 
 	env := func(key, defaultValue string) string {
@@ -57,12 +59,11 @@ func init() {
 	dbAuthUser = env("DB_USER", DBAuthUser)
 	dbAuthPass = env("DB_PASSWORD", DBAuthPass)
 	dbSchema = env("DB_SCHEMA", DBSchema)
-	//dbPort, err := strconv.Atoi(env("DB_PORT", DBPort))
+	dbPort, err = strconv.Atoi(env("DB_PORT", DBPort))
 	if err != nil {
 		panic(err)
 	}
-
-	dSN = fmt.Sprintf("%s:%s@%s/%s?timeout=30s&charset=utf8", dbAuthUser, dbAuthPass, dbHost, dbSchema)
+	dSN = fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?timeout=30s&charset=utf8", dbAuthUser, dbAuthPass, dbHost, dbPort, dbSchema)
 	fmt.Printf("Connect to %s\n", dSN)
 
 	Db, err = sql.Open("mysql", dSN)

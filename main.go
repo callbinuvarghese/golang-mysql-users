@@ -19,6 +19,8 @@ import (
 
 /*
   Mysql
+  curl -X POST -d 'firstname=User&lastname=Two&city=London&email=user.two@accenture.com&age=32' "http://localhost:8080/users"
+  
 */
 const AppPort = ":8080"
 

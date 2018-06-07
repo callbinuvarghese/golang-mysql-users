@@ -1,1 +1,2 @@
-docker build -t binu/golang-cassandra-patient .
+docker build -t dockerhub.accenture.com/ips/golang-mysql-users:1 .
+docker push dockerhub.accenture.com/ips/golang-mysql-users:1
